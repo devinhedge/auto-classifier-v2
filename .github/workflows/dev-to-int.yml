@@ -25,7 +25,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8.6.0
+          version: 10.12.4
 
       - name: Get pnpm store directory
         id: pnpm-cache
@@ -41,39 +41,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - name: Check environment and files
-        run: |
-          echo "Node version:"
-          node --version
-          echo "pnpm version:"
-          pnpm --version
-          echo "Current directory:"
-          pwd
-          echo "Directory contents:"
-          ls -la
-          echo "package.json exists:"
-          test -f package.json && echo "Yes" || echo "No"
-          echo "pnpm-lock.yaml exists:"
-          test -f pnpm-lock.yaml && echo "Yes" || echo "No"
-          echo "pnpm-lock.yaml file size:"
-          wc -c < pnpm-lock.yaml || echo "File not found"
-          
-          echo "Contents of package.json:"
-          cat package.json
-          
-          echo "NPM configuration:"
-          npm config list
-          
-          echo "Contents of node_modules (if exists):"
-          ls -la node_modules || echo "node_modules directory not found"
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run Linter and Style Checker
-        run: |
-          pnpm run lint
-          pnpm run format-check
+      - name: Run Linter
+        run: pnpm run lint
+
+      - name: Run Formatter Check
+        run: pnpm run format:check
 
       - name: Run Tests and Check Coverage
         run: |
