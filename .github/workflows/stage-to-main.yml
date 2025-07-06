@@ -1,0 +1,34 @@
+name: Stage to Main Workflow
+
+on:
+  push:
+    branches:
+      - stage
+
+jobs:
+  test-and-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set up project
+        run: |
+          # Add commands to set up your project (e.g., install dependencies)
+          # For example:
+          # npm install
+
+      - name: Run regression tests
+        run: |
+          # Add commands to run your regression tests
+          # For example:
+          # npm run test
+
+      - name: Create Pull Request
+        if: success()
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          title: 'Merge stage into main'
+          body: 'This PR was automatically created by the CI workflow. All tests have passed on the stage branch.'
+          base: main
