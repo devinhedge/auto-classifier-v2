@@ -30,7 +30,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.PAT_TOKEN }}
-          branch: main
+          branch: stage
           base: main
           title: 'Merge stage into main'
           body: >-
