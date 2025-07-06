@@ -101,6 +101,30 @@ Convert the blank spaces to "_" in the output.
 -   Search for `Auto Classifier` in the Community plugin tab of the Obsidian settings.
 -   Alternatively, you can manually download the latest release from this repository's [GitHub releases](https://github.com/acola/auto-classifier/releases) and extract the ZIP file to your Obsidian plugins folder.
 
+## Development
+
+### Running Tests
+
+To run the test suite:
+
+```bash
+npm run test
+```
+
+To run tests in watch mode:
+
+```bash
+npm run test:watch
+```
+
+To generate a coverage report:
+
+```bash
+npm run test:coverage
+```
+
+Make sure to run `npm install` before running the tests to ensure all dependencies are installed.
+
 ## Support
 
 If you encounter any issues while using this plugin or have suggestions for improvement, please feel free to submit an issue on the GitHub repository. Pull requests are also welcome.
