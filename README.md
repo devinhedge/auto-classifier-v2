@@ -6,11 +6,11 @@
 
 ## Release History
 
-v1.0.0: Initial version was created and maintained by [Hyeonseo Nam](https://github.com/HyeonseoNam/auto-classifier).
-v1.2.0: Last well maintained version by [Hyeonseo Nam](https://github.com/HyeonseoNam/auto-classifier).
-v1.2.1: Patched version to update to the latest LLM API by [Hyeonseo Nam](https://github.com/HyeonseoNam/auto-classifier) by was a failed build.
-v1.2.2: Patched version to fix the failed build by [acola](https://github.com/acola/auto-classifier) using Claude.
-v2.0.0: This version baselined and now maintained as a separate version with new feature *aspirations* for Taxonomy, Ontology, and Topics (tags) in the Frontmatter.
+* v1.0.0: Initial version was created and maintained by [Hyeonseo Nam](https://github.com/HyeonseoNam/auto-classifier).
+* v1.2.0: Last well maintained version by [Hyeonseo Nam](https://github.com/HyeonseoNam/auto-classifier).
+* v1.2.1: Patched version to update to the latest LLM API by [Hyeonseo Nam](https://github.com/HyeonseoNam/auto-classifier) after the initial build failed.
+* v1.2.2: Patched version to fix the failed build by [acola](https://github.com/acola/auto-classifier) using Claude.
+* v2.0.0: This version baselined and now maintained as a separate version with new feature *aspirations* for Taxonomy, Ontology, and Topics (tags) in the Frontmatter.
 
 ## How to use
 
