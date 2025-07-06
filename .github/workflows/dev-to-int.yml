@@ -20,7 +20,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Adjust this to match your project's Node.js version
+          node-version: '24'  # Updated to Node.js v24
 
       - name: Check environment and files
         run: |
@@ -38,6 +38,24 @@ jobs:
           test -f package-lock.json && echo "Yes" || echo "No"
           echo "package-lock.json file size:"
           wc -c < package-lock.json || echo "File not found"
+          
+          echo "Contents of package.json:"
+          cat package.json
+          
+          echo "Contents of package-lock.json:"
+          cat package-lock.json
+          
+          echo "NPM configuration:"
+          npm config list
+          
+          echo "Lockfile version:"
+          grep -m 1 '"lockfileVersion":' package-lock.json || echo "Lockfile version not found"
+          
+          echo "Contents of node_modules (if exists):"
+          ls -la node_modules || echo "node_modules directory not found"
+          
+          echo "NPM dependency tree:"
+          npm ls --depth=1
 
       - name: Install dependencies
         run: npm ci --verbose
