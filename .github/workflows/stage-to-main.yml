@@ -23,6 +23,7 @@ jobs:
           # For example:
           # npm run test
 
+<<<<<<< HEAD
       - name: Create Pull Request
         if: success()
         uses: peter-evans/create-pull-request@v3
@@ -32,3 +33,22 @@ jobs:
           title: 'Merge stage into main'
           body: 'This PR was automatically created by the CI workflow. All tests have passed on the stage branch.'
           base: main
+=======
+          - name: Create Pull Request
+          if: success()
+          uses: peter-evans/create-pull-request@v3
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            branch: main
+            title: 'Merge stage into main'
+            body: |
+              This PR was automatically created by the CI workflow. All tests have passed on the stage branch.
+  
+              Changes in this PR:
+              ${{ github.event.commits[0].message }}
+  
+              For a full list of changes, please review the commits in this PR.
+            labels: automated-pr
+            assignees: ${{ github.actor }}
+            reviewers: ${{ github.actor }}
+>>>>>>> e1f675d (Add GitHub Actions workflow for merging stage into main)
