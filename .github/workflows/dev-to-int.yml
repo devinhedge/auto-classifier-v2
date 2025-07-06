@@ -18,57 +18,67 @@ jobs:
           fetch-depth: 0
       
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '24'  # Updated to Node.js v24
+          node-version: '24'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8.6.0
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Check environment and files
         run: |
           echo "Node version:"
           node --version
-          echo "NPM version:"
-          npm --version
+          echo "pnpm version:"
+          pnpm --version
           echo "Current directory:"
           pwd
           echo "Directory contents:"
           ls -la
           echo "package.json exists:"
           test -f package.json && echo "Yes" || echo "No"
-          echo "package-lock.json exists:"
-          test -f package-lock.json && echo "Yes" || echo "No"
-          echo "package-lock.json file size:"
-          wc -c < package-lock.json || echo "File not found"
+          echo "pnpm-lock.yaml exists:"
+          test -f pnpm-lock.yaml && echo "Yes" || echo "No"
+          echo "pnpm-lock.yaml file size:"
+          wc -c < pnpm-lock.yaml || echo "File not found"
           
           echo "Contents of package.json:"
           cat package.json
           
-          echo "Contents of package-lock.json:"
-          cat package-lock.json
-          
           echo "NPM configuration:"
           npm config list
           
-          echo "Lockfile version:"
-          grep -m 1 '"lockfileVersion":' package-lock.json || echo "Lockfile version not found"
-          
           echo "Contents of node_modules (if exists):"
           ls -la node_modules || echo "node_modules directory not found"
-          
-          echo "NPM dependency tree:"
-          npm ls --depth=1
 
       - name: Install dependencies
-        run: npm ci --verbose
+        run: pnpm install --frozen-lockfile
 
       - name: Run Linter and Style Checker
         run: |
-          npm run lint
-          npm run format-check
+          pnpm run lint
+          pnpm run format-check
 
       - name: Run Tests and Check Coverage
         run: |
-          npm test -- --coverage
-          if [ $(npm test -- --coverage | grep -oP '(?<=All files \|)\s*\d+(\.\d+)?(?=\s*\|)' | awk '{print int($1)}') -lt 95 ]; then
+          pnpm test -- --coverage
+          if [ $(pnpm test -- --coverage | grep -oP '(?<=All files \|)\s*\d+(\.\d+)?(?=\s*\|)' | awk '{print int($1)}') -lt 95 ]; then
             echo "Test coverage is below 95%. Failing the build."
             exit 1
           fi
