@@ -4,6 +4,14 @@
 
 `Auto Classifier` is an [Obsidian](https://obsidian.md/) plugin that helps you automatically classify tags in your notes using any OpenAI-compatible LLM API. The plugin can analyze your note (including its title, frontmatter, content, or selected area) and suggest relevant tags based on the input with tags in your vault. This can be used for various specific purposes, for example, DDC classification for books, keyword recommendation, research paper categorization, and so on. Save time and improve your note organization.
 
+## Release History
+
+* v1.0.0: Initial version was created and maintained by [Hyeonseo Nam](https://github.com/HyeonseoNam/auto-classifier).
+* v1.2.0: Last well maintained version by [Hyeonseo Nam](https://github.com/HyeonseoNam/auto-classifier).
+* v1.2.1: Patched version to update to the latest LLM API by [Hyeonseo Nam](https://github.com/HyeonseoNam/auto-classifier) after the initial build failed.
+* v1.2.2: Patched version to fix the failed build by [acola](https://github.com/acola/auto-classifier) using Claude.
+* v2.0.0: This version baselined and now maintained as a separate version with new feature *aspirations* for Taxonomy, Ontology, and Topics (tags) in the Frontmatter.
+
 ## How to use
 
 -   Configure your API settings in the settings tab:
@@ -99,7 +107,9 @@ If you encounter any issues while using this plugin or have suggestions for impr
 
 ## Author
 
-Hyeonseo Nam
+Devin Hedge via
+[acola](https://github.com/acola/auto-classifier) via
+[Hyeonseo Nam](https://github.com/HyeonseoNam/auto-classifier)
 
 ## License
 
