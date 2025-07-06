@@ -6,10 +6,12 @@ on:
       - stage
 
 jobs:
-  test-and-pr:
+  stage-to-main:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       
       - name: Set up project
         run: |
@@ -27,8 +29,9 @@ jobs:
         if: success()
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
           branch: main
+          base: main
           title: 'Merge stage into main'
           body: >-
             This PR was automatically created by the CI workflow. All tests have passed on the stage branch.
