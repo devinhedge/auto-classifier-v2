@@ -1,4 +1,3 @@
-import 'openai/shims/node';
 import OpenAI from 'openai';
 
 export class ChatGPT {
@@ -35,8 +34,8 @@ export class ChatGPT {
 			});
 
 			return completion.choices[0].message.content || '';
-		} catch (error: any) {
-			if (error && typeof error === 'object' && 'status' in error) {
+		} catch (error) {
+			if (error instanceof OpenAI.APIError) {
 				throw new Error(`OpenAI API Error: ${error.status} - ${error.message}`);
 			}
 			throw error;
